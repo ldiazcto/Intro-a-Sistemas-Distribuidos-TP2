@@ -20,4 +20,11 @@ class MyTopo(Topo):
 #topos = { 'customTopo ': Topo }
 topos = {'mytopo': MyTopo}
 #
+
 #sudo mn --custom ./topologia.py --topo mytopo --mac --switch ovsk
+'''
+mininet> net // muestra información sobre la red
+mininet> h1 ping –c1 h2 // manda un ping desde el Host 1 (h1) al Host 2 (h2)
+mininet> h1 ifconfig // muestra información sobre los interfaces de h1
+mininet> exit // cierra la consola
+'''
