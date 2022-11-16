@@ -52,7 +52,7 @@ class MyTopo(Topo):
         lastSwitch = self.create_last_switch(switchesAmount, previousSwitch, firewallPosition)
     
 
-    def __init__( self, switchesAmount, firewallPosition):
+    def __init__( self, switchesAmount=3, firewallPosition=1):
         # Initialize topology
         Topo.__init__( self )
         #switchesAmount = 0
@@ -60,17 +60,19 @@ class MyTopo(Topo):
         # opciones = [switchesAmount, firewallPosition]
         # listaArgumentos = sys.argv[1:]
         # getopt.getopt(listaArgumentos,opciones)
-
+        print("Switched smount-->" , switchesAmount)
+        print("firewallPosition--->" , firewallPosition)
         #self.configure_structure(sys.argv[1], sys.argv[2])
         self.configure_structure( (int) (switchesAmount),(int) (firewallPosition))
         print("Terminé de crear!")
 
 
 #topos = { 'customTopo ': Topo }
-topos = {'mytopo': MyTopo(sys.argv[6], sys.argv[7])} #los entiende, pero después se piensa que tiene que seguir interpretando y lanza la ayuda
-#
+topos = {'mytopo': MyTopo} #los entiende, pero después se piensa que tiene que seguir interpretando y lanza la ayuda
 
-#sudo mn --custom ./topologia.py --topo mytopo --mac --switch ovsk
+
+#sudo mn --custom ./topologia.py --topo mytopo,5,1 --mac
+
 #sudo mn -c <-- para terminar de borrar cosas colgadas de mininet
 '''
 mininet> net // muestra información sobre la red
