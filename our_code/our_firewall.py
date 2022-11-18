@@ -29,10 +29,14 @@ class Firewall (EventMixin):
         
         print(" Se llam'o a _handle_ConnectionUp")
 
+        self.filter_port_dst_80(event)
+        self.filter_host_1(event)
+        self.uncommunicate_hosts(event,host_not_src="00:00:00:00:00:01",host_not_dst="00:00:00:00:00:04")
+
         #Add your logic here
-        log.debug("Switch %s has come up.", dpid_to_str(event.dpid))
-        if (event.connection.dpid == gl_firewallPosition):
-            print(" Entre al if del _handle_ConnectionUp!! ")        
+        #log.debug("Switch %s has come up.", dpid_to_str(event.dpid))
+        #if (event.connection.dpid == gl_firewallPosition):
+        #    print(" Entre al if del _handle_ConnectionUp!! ")        
             #for fw_msg in self.firewallRules:
             #    event.connection.send(fw_msg) 
                 
@@ -58,56 +62,29 @@ class Firewall (EventMixin):
        #message.priority = 32768
        message.match = self.match
        message.actions.append(of.ofp_action_output(port = of.OFPP_NONE))
-       event.connection.send(message)
+       event.connection.send(message,event)
 
-    def filter_port_dst_80(self):  #regla 1
+    def filter_port_dst_80(self,event):  #regla 1
         self.match.tp_dst = 80
         message = of.ofp_flow_mod()
-        self.send_message_none(message)
+        self.send_message_none(message,event)
         #falta lógica
-        return 0;
+        return 0
 
-    def filter_host_1(self):  #regla 2
+    def filter_host_1(self,event):  #regla 2
         self.match.src = EthAddr("00:00:00:00:00:01")
         self.match.nw_proto = pkt.ipv4.UDP_PROTOCOL
         self.match.nw_dst = 5001
         message = of.ofp_flow_mod()
-        self.send_message_none(message)
+        self.send_message_none(message,event)
         #falta lógica
-        return 0;
+        return 0
 
-    def uncommunicate_hosts(self,host_not_src,host_not_dst):  #regla 3
+    def uncommunicate_hosts(self,event,host_not_src,host_not_dst):  #regla 3
         self.match.src = EthAddr(host_not_src)
         self.match.dst = EthAddr(host_not_dst)
         message = of.ofp_flow_mod()
-        self.send_message_none(message)
+        self.send_message_none(message,event)
         #falta lógica
         return 0
         
-        
-#https://www.youtube.com/watch?v=fzqVR4-oeso&t=502s&ab_channel=WangRobbie 
-
-#iperf --> para pruebas de rendimiento
-
-#get_switch_desc  ---> gets switch details
-#get_switches   ---> gets list of switches
-
-# openflow.keepalive --> pra que el switch no piense que el controller murió
-
-#https://noxrepo.github.io/pox-doc/html/#id120
-
-#https://noxrepo.github.io/pox-doc/html/
-#https://github.com/CPqD/RouteFlow/blob/master/pox/pox/openflow/libopenflow_01.py
-
-#https://github.com/hip2b2/poxstuff/blob/master/of_firewall.py
-
-
-
-
-
-#https://noxrepo.github.io/pox-doc/html/#openflow-actions
-
-#https://noxrepo.github.io/pox-doc/html/#id78
-
-
-# en nuestro comando necesitamos poner algo acerca de Layer 2 learning switch, porque nuestros switches tienen que ser de tipo learning
