@@ -6,7 +6,6 @@ import getopt
 
 class MyTopo(Topo):
 
-
     def create_first_switch(self, firewallPosition) :
         switch_outter_left = self.addSwitch("s1")
         h1_left = self.addHost("h1")
