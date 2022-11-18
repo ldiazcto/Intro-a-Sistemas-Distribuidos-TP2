@@ -1,8 +1,8 @@
 # coding=utf-8
-from mininet.net import Mininet
 from mininet.topo import Topo
 import sys;
 import getopt
+
 
 class MyTopo(Topo):
 
@@ -14,8 +14,8 @@ class MyTopo(Topo):
         self.addLink(switch_outter_left , h1_left)
         self.addLink(switch_outter_left , h2_left)
 
-        if (firewallPosition == 1):
-            print("Soy firewall! pos = ", 1)
+        # if (firewallPosition == 1):
+        #     print("Soy firewall! pos = ", 1)
 
         return switch_outter_left
 
@@ -29,8 +29,8 @@ class MyTopo(Topo):
 
         self.addLink(previousSwitch, switch_outter_right)
 
-        if (firewallPosition == switchNumber):
-            print("Soy firewall! pos = ", switchNumber)
+        # if (firewallPosition == switchNumber):
+        #     print("Soy firewall! pos = ", switchNumber)
 
         return switch_outter_right
 
@@ -41,8 +41,8 @@ class MyTopo(Topo):
         
         previousSwitch = firstSwtich
         for i in range(2, switchesAmount):
-            if (i == firewallPosition):
-                print("Soy firewall! pos = ", i)
+            # if (i == firewallPosition):
+            #     print("Soy firewall! pos = ", i)
                 
             newSwitch = self.addSwitch("s" + (str)(i))  
             self.addLink(previousSwitch, newSwitch)
@@ -55,10 +55,13 @@ class MyTopo(Topo):
         Topo.__init__( self )
         print("Switched smount-->" , switchesAmount)
         print("firewallPosition--->" , firewallPosition)
+        
+        gl_firewallPosition = firewallPosition
+        
         self.configure_structure( (int) (switchesAmount),(int) (firewallPosition))
+    
         print("Terminé de crear!")
 
-#topos = { 'customTopo ': Topo }
 topos = {'mytopo': MyTopo}
 
 
