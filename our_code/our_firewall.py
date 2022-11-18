@@ -22,6 +22,7 @@ class Firewall (EventMixin):
 
     def __init__(self):
         self.listenTo(core.openflow.addListenerByName("ConnectionUp",self._handle_ConnectionUp))
+        self.match = of.ofp_match()
         log.debug("Enabling Firewall Module")
 
     def _handle_ConnectionUp(self,event): #o _handle_PacketIn() ???
@@ -50,27 +51,36 @@ class Firewall (EventMixin):
         #Starting the Firewall module
         pox.forwarding.l2_learning.launch()
         core.registerNew(Firewall)
-        
-
-    def obtain_match(self):
-        match = of.ofp_match()
-        return match
-        
+    
+    def send_message_none(self,message,event):
+       #message.hard_timeout = 0
+       #message.soft_timeout = 0
+       #message.priority = 32768
+       message.match = self.match
+       message.actions.append(of.ofp_action_output(port = of.OFPP_NONE))
+       event.connection.send(message)
 
     def filter_port_dst_80(self):  #regla 1
-        self.obtain_match().tp_dst = 80
+        self.match.tp_dst = 80
+        message = of.ofp_flow_mod()
+        self.send_message_none(message)
         #falta lógica
-        return 0
+        return 0;
 
-    def filter_host_1(self, event):  #regla 2
-        self.obtain_match().src = EthAddr("00:00:00:00:00:01")
-        self.obtain_match().nw_proto = pkt.ipv4.UDP_PROTOCOL
-        self.obtain_match().nw_dst = 5001
+    def filter_host_1(self):  #regla 2
+        self.match.src = EthAddr("00:00:00:00:00:01")
+        self.match.nw_proto = pkt.ipv4.UDP_PROTOCOL
+        self.match.nw_dst = 5001
+        message = of.ofp_flow_mod()
+        self.send_message_none(message)
         #falta lógica
-        return 0
+        return 0;
 
-    def uncommunicate_hosts(self):  #regla 3
-
+    def uncommunicate_hosts(self,host_not_src,host_not_dst):  #regla 3
+        self.match.src = EthAddr(host_not_src)
+        self.match.dst = EthAddr(host_not_dst)
+        message = of.ofp_flow_mod()
+        self.send_message_none(message)
         #falta lógica
         return 0
         
