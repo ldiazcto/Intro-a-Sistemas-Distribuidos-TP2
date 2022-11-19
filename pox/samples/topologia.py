@@ -30,7 +30,7 @@ class MyTopo(Topo):
         self.addLink(previousSwitch, switch_outter_right)
 
         # if (firewallPosition == switchNumber):
-        #     print("Soy firewall! pos = ", switchNumber)
+        #      print("Soy firewall! pos = ", switchNumber)
 
         return switch_outter_right
 
