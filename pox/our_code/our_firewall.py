@@ -11,7 +11,7 @@ from pox.our_code.topologia import gl_firewallPosition
 
 
 log = core.getLogger()
-class Firewall (EventMixin):
+class Firewall(EventMixin):
 
     #def ControllerRule (self, src, dst, value):
      #   if(src,dst) not in self.firewall:
@@ -20,10 +20,15 @@ class Firewall (EventMixin):
 #    def DeleteRule (self, src, dst): #asumo si la llamas sabes que existe
 #        del self.firewall[(src,dst)]
 
-    def __init__(self):
-        self.listenTo(core.openflow.addListenerByName("ConnectionUp",self._handle_ConnectionUp))
+    def __init__(self, connection):
+        log.info("------ENTRE AL FIREWALL CONSTRUCTOR")
+
+        self.connection = connection
+        connection.addListeners(self)
+
+        #self.listenTo(core.openflow.addListenerByName("ConnectionUp",self._handle_ConnectionUp))
         self.match = of.ofp_match()
-        log.debug("Enabling Firewall Module")
+        #log.debug("Enabling Firewall Module")
 
     def _handle_ConnectionUp(self,event): #o _handle_PacketIn() ???
         
@@ -50,11 +55,15 @@ class Firewall (EventMixin):
 
 
     def launch():
+        log.info("------ENTRE AL FIREWALL launch")
+        def start_switch(event):
+            log.debug("Controlling %s" % (event.connection,))
+            Firewall(event.connection)
         #core.openflow.addListenerByName("ConnectionUp", _handle_ConnectionUp)
-
+        core.openflow.addListenerByName("ConnectionUp", start_switch)
         #Starting the Firewall module
-        pox.forwarding.l2_learning.launch()
-        core.registerNew(Firewall)
+        #pox.forwarding.l2_learning.launch()
+        #core.registerNew(Firewall)
     
     def send_message_none(self,message,event):
        #message.hard_timeout = 0
