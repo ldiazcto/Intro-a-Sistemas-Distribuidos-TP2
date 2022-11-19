@@ -43,7 +43,7 @@ all_ports = of.OFPP_FLOOD
 # matching rule.
 def _handle_PacketIn (event):
   packet = event.parsed
-
+  log.info("--------------Estoy en handle packet in ")
   # Learn the source
   table[(event.connection,packet.src)] = event.port
 
