@@ -65,8 +65,17 @@ class MyTopo(Topo):
 
 topos = {'mytopo': MyTopo}
 
-
+#---Levantar topología
 #sudo mn --custom ./topologia.py --topo mytopo,5,1 --mac --controller=remote
+
+#------Este comando se ejecuta si pox.py esta afuera de la carpeta pox
+#python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning our_code.our_firewall
+
+
+#Sino va este
+#pox/pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning our_code.our_firewall
+
+
 # asegurarse de estar en el branch helosaur
 #->  git checkout halosaur
 
