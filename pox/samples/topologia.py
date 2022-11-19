@@ -1,12 +1,12 @@
 import global_vars.global_vars as global_vars
-from pox.core import core
-import pox.forwarding.l2_pairs as l2p
-import pox.forwarding.l2_learning as l2l
-log = core.getLogger()
+#from pox.core import core
+#import pox.forwarding.l2_pairs as l2p
+#import pox.forwarding.l2_learning as l2l
+#log = core.getLogger()
 
 from mininet.topo import Topo
 
-print("GLOBAL VARS %s", global_vars)
+#print("GLOBAL VARS %s", global_vars)
 class MyTopo(Topo):
 
     def create_first_switch(self) :
@@ -71,7 +71,7 @@ topos = {'mytopo': MyTopo}
 #python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.new_firewall --firewallPosition=2
 
 #Sino va este
-#pox/pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning our_code.our_firewall
+#pox/pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.our_firewall
 
 
 # asegurarse de estar en el branch helosaur
