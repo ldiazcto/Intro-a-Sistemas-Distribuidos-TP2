@@ -11,6 +11,10 @@ import pox.lib.packet as pkt
 
 log = core.getLogger()
 
+TCP = 6
+UDP = 17
+IP = 0X800
+
 def send_message_none(message, event):
        #message.hard_timeout = 0
        #message.soft_timeout = 0
@@ -21,9 +25,31 @@ def send_message_none(message, event):
        event.connection.send(message)
 
 def filter_port_dst_80(event):  #regla 1
+    """
     msg = of.ofp_flow_mod()
     msg.match.tp_dst = 80
+    #msg.match.in_port = 80 #??
     event.connection.send(msg)
+    """
+    msg_tcp = of.ofp_match()
+    msg_tcp.dl_type=IP
+    msg_tcp.nw_proto=TCP 
+    msg_tcp.tp_src = 80
+    msg_tcp.tp_dst = 80 #Para poder seleccionar que el puerto sea el 80, deben si o si especificarse las capas anteriores, es decir, IP y TCP
+    openflow_packet = of.ofp_flow_mod()
+    openflow_packet.match = msg_tcp
+    #Nota: Al no especificar una accion a realizar tras el match, el paquete sera descartado
+    event.connection.send(openflow_packet)
+
+    # msg_udp = of.ofp_match()
+    # msg_udp.dl_type=IP
+    # msg_udp.nw_proto=UDP
+    # msg_udp.tp_dst = 80
+    # openflow_packet = of.ofp_flow_mod()
+    # openflow_packet.match = msg_udp
+    # event.connection.send(openflow_packet)
+    #log.debug("Firewall rules 1 installed on %s", dpidToStr(event.dpid))
+
 
 #def filter_host_1(event):  #regla 2
 #    self.match.src = EthAddr("00:00:00:00:00:01")
@@ -38,10 +64,11 @@ def uncommunicate_hosts(event, host_not_src, host_not_dst):  #regla 3
     msg.match.dl_dst= EthAddr(host_not_dst)
     event.connection.send(msg)
 
+
 def _handle_PacketInFirewall(event):
     log.info("Soy el handler del Firewall") #Esto se imprimirá muchas veces xd!
     #uncommunicate_hosts(event, host_not_src="00:00:00:00:00:01", host_not_dst="00:00:00:00:00:04") #VER COMO PARAMETRIZAR HOSTS
-    filter_port_dst_80(event)
+    #filter_port_dst_80(event)
 
 
 def _handle_ConnectionUp (event):
