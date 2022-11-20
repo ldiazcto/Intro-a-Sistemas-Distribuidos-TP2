@@ -1,4 +1,4 @@
-import global_vars.global_vars as global_vars
+#import global_vars.global_vars as global_vars
 #from pox.core import core
 #import pox.forwarding.l2_pairs as l2p
 #import pox.forwarding.l2_learning as l2l
@@ -60,11 +60,11 @@ class MyTopo(Topo):
             #log.error("FirewallPosition inalcanzable, debe ser menor o igual a la cantidad de swithces ingresados")
         self.configure_structure( (int) (switchesAmount))
     
-        print("Terminé de crear!")
+        print("Termine de crear!")
 
 topos = {'mytopo': MyTopo}
 
-#---Levantar topología parados en la carpeta pox/samples --- > EDIT : Ahora no se le pasa la posicion del firewall
+#---Levantar topologia parados en la carpeta pox/samples --- > EDIT : Ahora no se le pasa la posicion del firewall
 #sudo mn --custom ./topologia.py --topo mytopo,5 --mac --controller=remote
 
 #------Este comando se ejecuta si pox.py esta afuera de la carpeta pox
@@ -80,9 +80,9 @@ topos = {'mytopo': MyTopo}
 
 #sudo mn -c <-- para terminar de borrar cosas colgadas de mininet
 '''
-mininet> net // muestra información sobre la red
-mininet> pingall //manda ping a todos y te dice cuántos dropeo
-mininet> h1 ping –c1 h2 // manda un ping desde el Host 1 (h1) al Host 2 (h2)
-mininet> h1 ifconfig // muestra información sobre los interfaces de h1
+mininet> net // muestra informacion sobre la red
+mininet> pingall //manda ping a todos y te dice cuantos dropeo
+mininet> h1 ping c1 h2 // manda un ping desde el Host 1 (h1) al Host 2 (h2)
+mininet> h1 ifconfig // muestra informacion sobre los interfaces de h1
 mininet> exit // cierra la consola
 '''

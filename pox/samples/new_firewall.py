@@ -2,12 +2,54 @@ from pox.core import core
 import pox.forwarding.l2_pairs as l2p
 import pox.forwarding.l2_learning as l2l
 from global_vars import global_vars
+import pox.openflow.libopenflow_01 as of
+from pox.lib.revent import *
+from pox.lib.addresses import EthAddr
+from pox.lib.util import dpid_to_str
+from collections import namedtuple
+import pox.lib.packet as pkt
 
 log = core.getLogger()
 
+def send_message_none(message, event):
+       #message.hard_timeout = 0
+       #message.soft_timeout = 0
+       #message.priority = 32768
+       #message.match = self.match ##?
+       #message.actions.append(of.ofp_action_output(port = of.OFPP_NONE))
+       #message.actions = []
+       event.connection.send(message)
+
+#def filter_port_dst_80(self,event):  #regla 1
+#    self.match.tp_dst = 80
+#    message = of.ofp_flow_mod()
+#    self.send_message_none(message,event)
+
+#def filter_host_1(event):  #regla 2
+#    self.match.src = EthAddr("00:00:00:00:00:01")
+#   self.match.nw_proto = pkt.ipv4.UDP_PROTOCOL
+#    self.match.nw_dst = 5001
+#    message = of.ofp_flow_mod()
+#    self.send_message_none(message,event)
+
+def uncommunicate_hosts(event, host_not_src, host_not_dst):  #regla 3
+    # message = of.ofp_flow_mod()
+    # message.match.src = EthAddr(host_not_src)
+    # message.match.dst = EthAddr(host_not_dst)
+    # #message = of.ofp_flow_mod()
+    # send_message_none(message, event)
+    msg = of.ofp_flow_mod()
+    msg.match.dl_src = EthAddr(host_not_src) # not reversed this time!
+    msg.match.dl_dst= EthAddr(host_not_dst)
+    #msg.actions.append(of.ofp_action_output(port = dst_port))
+    event.connection.send(msg)
+
 def _handle_PacketInFirewall(event):
     log.info("Soy el handler del Firewall") #Esto se imprimirá muchas veces xd!
-    l2p._handle_PacketIn(event)
+    #l2p._handle_PacketIn(event)
+    uncommunicate_hosts(event, host_not_src="00:00:00:00:00:01", host_not_dst="00:00:00:00:00:04")
+    #pck = event.parsed
+
 
 def _handle_ConnectionUp (event):
     log.info("-----_handle_ConnectionUp")

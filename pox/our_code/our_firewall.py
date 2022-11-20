@@ -7,8 +7,6 @@ import pox.lib.packet as pkt  #se puede definir el tipo de paquete, si es IPv4 y
 from pox.lib.util import dpid_to_str
 from collections import namedtuple
 
-from pox.our_code.topologia import gl_firewallPosition
-
 
 log = core.getLogger()
 class Firewall(EventMixin):
