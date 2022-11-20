@@ -20,10 +20,10 @@ def send_message_none(message, event):
        #message.actions = []
        event.connection.send(message)
 
-#def filter_port_dst_80(self,event):  #regla 1
-#    self.match.tp_dst = 80
-#    message = of.ofp_flow_mod()
-#    self.send_message_none(message,event)
+def filter_port_dst_80(event):  #regla 1
+    msg = of.ofp_flow_mod()
+    msg.match.tp_dst = 80
+    event.connection.send(msg)
 
 #def filter_host_1(event):  #regla 2
 #    self.match.src = EthAddr("00:00:00:00:00:01")
@@ -33,22 +33,15 @@ def send_message_none(message, event):
 #    self.send_message_none(message,event)
 
 def uncommunicate_hosts(event, host_not_src, host_not_dst):  #regla 3
-    # message = of.ofp_flow_mod()
-    # message.match.src = EthAddr(host_not_src)
-    # message.match.dst = EthAddr(host_not_dst)
-    # #message = of.ofp_flow_mod()
-    # send_message_none(message, event)
     msg = of.ofp_flow_mod()
     msg.match.dl_src = EthAddr(host_not_src) # not reversed this time!
     msg.match.dl_dst= EthAddr(host_not_dst)
-    #msg.actions.append(of.ofp_action_output(port = dst_port))
     event.connection.send(msg)
 
 def _handle_PacketInFirewall(event):
     log.info("Soy el handler del Firewall") #Esto se imprimirá muchas veces xd!
-    #l2p._handle_PacketIn(event)
-    uncommunicate_hosts(event, host_not_src="00:00:00:00:00:01", host_not_dst="00:00:00:00:00:04")
-    #pck = event.parsed
+    #uncommunicate_hosts(event, host_not_src="00:00:00:00:00:01", host_not_dst="00:00:00:00:00:04") #VER COMO PARAMETRIZAR HOSTS
+    filter_port_dst_80(event)
 
 
 def _handle_ConnectionUp (event):
