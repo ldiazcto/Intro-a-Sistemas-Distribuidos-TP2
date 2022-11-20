@@ -61,9 +61,9 @@ def uncommunicate_hosts(event, host_not_src, host_not_dst):
 
 def _handle_PacketInFirewall(event):
     log.info("Soy el handler del Firewall") #Esto se imprimirá muchas veces xd!
-    #filter_port_dst_80(event)
+    filter_port_dst_80(event)
     filter_host_1(event)
-    #uncommunicate_hosts(event, host_not_src="00:00:00:00:00:01", host_not_dst="00:00:00:00:00:04") #VER COMO PARAMETRIZAR HOSTS
+    uncommunicate_hosts(event, host_not_src="00:00:00:00:00:01", host_not_dst="00:00:00:00:00:04") #VER COMO PARAMETRIZAR HOSTS
     
 
 def _handle_ConnectionUp (event):
