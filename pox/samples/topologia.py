@@ -67,11 +67,23 @@ topos = {'mytopo': MyTopo}
 #---Levantar topologia parados en la carpeta pox/samples --- > EDIT : Ahora no se le pasa la posicion del firewall
 #sudo mn --custom ./topologia.py --topo mytopo,5 --mac --controller=remote
 
+#xterm h1
+#xterm h2
+###h1 Server
+#sudo iperf -s -B 10.0.0.1 -p puerto
+
+### Cualquier host 
+#Cliente
+#sudo iperf -c 10.0.0.1 -p puerto -t cantDeTimetolive
+
+
+
 #------Este comando se ejecuta si pox.py esta afuera de la carpeta pox
 #python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.new_firewall --firewallPosition=2
 
 #Sino va este
 #pox/pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.our_firewall
+
 
 
 # asegurarse de estar en el branch helosaur
