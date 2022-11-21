@@ -110,7 +110,7 @@ Donde IP_ADDRESS y VALID_PORT deben ser los mismos valores que se ingresaron en 
 
 Se espera el siguiente resultado
 
-[H1 y H3 por UDP puerto 8000]([image_url](https://imgur.com/PjkRMCF))
+[H1 y H3 por UDP puerto 8000](https://imgur.com/PjkRMCF )
 
 
 
@@ -136,7 +136,7 @@ Donde IP_ADDRESS debe ser la misma dirección que se ingresó en el comando ante
 
 Se espera el siguiente resultado
 
-[H1 y H3 por UDP puerto 5001](https://imgur.com/6PNTilB)
+[H1 y H3 por UDP puerto 5001](https://imgur.com/6PNTilB )
 
 De esta manera, se prueba que la segunda regla se aplica correctamente. Ya se pueden cerrar las dos terminales de los hosts.
 
@@ -163,7 +163,7 @@ reemplazando IP_ADDRESS con la misma dirección que en el comando anterior, para
 
 
 Se espera el siguiente resultado
-[H2 y H4 por TCP puerto 80](https://imgur.com/W0wCIsq)
+[H2 y H4 por TCP puerto 80](https://imgur.com/W0wCIsq )
 
 De esta manera, se prueba que la primera regla funciona.
 
