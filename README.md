@@ -10,12 +10,14 @@ y se debe seguir los siguientes pasos:
 ### 1. Levantar el firewall
 Parándose en la carpeta pox/samples ejecutar el comando
 ```
-python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.custom_firewall --firewallPosition=XXX,YYY,ZZZ
+python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.custom_firewall --firewallPosition=XXX --host_not_src=YYY --host_not_dst=ZZZ
 ```
 Donde 
 - XXX es la posición que se desea del Firewall. Debe ser mayor a 1, sino saltará una excepción y se terminará la ejecución. Si es mayor a la cantidad de switches especificados en el paso 2, se entenderá que el usuario desea que ningún switch se comporte como firewall.
 - YYY es el host fuente que no puede comunicarse con el host destino (si es el host 1, enviar el número 1)
 - ZZZ es el host desinto que no puede comunicarse con el host fuente
+
+Cabe destacar que el host fuente no podrá comunicarse con el destino, ni viceversa. La comunicación entre ambos no se podrá establecer.
 
 
 Si se envía el firewall position 2, y los hosts incomunicados siendo 2 y 3, se espera ver el siguiente resultado en la terminal
@@ -94,7 +96,7 @@ Para levantar el servidor en el host 3, ejecutar en la respectiva terminal el co
 ```
 sudo iperf -s -B IP_ADDRESS -u -p VALID_PORT
 ```
-Donde IP_ADDRESS debe ser una dirección IP disponible, como por ejemplo, 10.0.0.1, y VALID_PORT debe ser un puerto no prohibido por enunciado, como por ejemplo el 8000.
+Donde IP_ADDRESS debe ser la dirección IP de ese nodo. En el caso del nodo 3, será 10.0.0.3, y VALID_PORT debe ser un puerto no prohibido por enunciado, como por ejemplo el 8000.
 
 Se espera el siguiente resultado
 ```
@@ -123,7 +125,7 @@ Para levantar el servidor en el host 3, ejecutar en la respectiva terminal el co
 ```
 sudo iperf -s -B IP_ADDRESS -u -p 5001
 ```
-Donde IP_ADDRESS debe ser una dirección IP disponible, como por ejemplo, 10.0.0.1.
+Donde IP_ADDRESS debe ser 10.0.0.3, debido a que se trata del host 3.
 
 Se espera el siguiente resultado
 ```
@@ -156,7 +158,7 @@ En la terminal de h2, ejecutar el comando
 ```
 sudo iperf -s -B IP_ADDRESS -p 80
 ```
-reemplazando IP_ADDRESS con una dirección IP válida, como 10.0.0.1, para que este host sea el servidor. Se espera la siguiente respuesta
+reemplazando IP_ADDRESS con la dirección IP válida del host, 10.0.0.2 en este caso, para que este host sea el servidor. Se espera la siguiente respuesta
 ```
 sudo iperf -c IP_ADDRESS -p 80 -t 5
 ```
