@@ -10,7 +10,7 @@ y se debe seguir los siguientes pasos:
 ### 1. Levantar el firewall
 Parándose en la carpeta pox/samples ejecutar el comando
 ```
-python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.new_firewall --firewallPosition=WWW
+python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.custom_firewall --firewallPosition=WWW
 ```
 Donde WWW es la posición que se desea del Firewall. Debe ser mayor a 1, sino saltará una excepción y se terminará la ejecución.
 
@@ -25,7 +25,7 @@ Se espera ver el siguiente resultado en la terminal
 ### 2. Levantar mininet
 En otra terminal, en la carpeta pox/samples ejecutar el comando
 ```
-sudo mn --custom ./topologia.py --topo mytopo,XXX,YYY,ZZZ --mac --controller=remote
+sudo mn --custom ./custom_topology.py --topo mytopo,XXX,YYY,ZZZ --mac --controller=remote
 ```
 Donde YYY es la cantidad de switches extra a agregar entre el primer switch y el último. Si se envía el valor 0, la topología solamente tendrá los switches 1 (conectado a los hosts 1 y 2) y 2 (conectado a los hosts 3 y 4). Si se envía el valor 5, se tendrán el switch 1 (conectado a los hosts 1 y 2), 2-3-4-5-6, conectados entre sí linealmente, y el switch 7 (conectado a los hosts 3 y 4).
 
