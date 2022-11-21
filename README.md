@@ -10,14 +10,25 @@ y se debe seguir los siguientes pasos:
 ### 1. Levantar el firewall
 Parándose en la carpeta pox/samples ejecutar el comando
 ```
-python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.custom_firewall --firewallPosition=WWW
+python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.custom_firewall --firewallPosition=XXX,YYY,ZZZ
 ```
-Donde WWW es la posición que se desea del Firewall. Debe ser mayor a 1, sino saltará una excepción y se terminará la ejecución.
+Donde 
+- XXX es la posición que se desea del Firewall. Debe ser mayor a 1, sino saltará una excepción y se terminará la ejecución. Si es mayor a la cantidad de switches especificados en el paso 2, se entenderá que el usuario desea que ningún switch se comporte como firewall.
+- YYY es el host fuente que no puede comunicarse con el host destino (si es el host 1, enviar el número 1)
+- ZZZ es el host desinto que no puede comunicarse con el host fuente
 
 
-Se espera ver el siguiente resultado en la terminal
+Si se envía el firewall position 2, y los hosts incomunicados siendo 2 y 3, se espera ver el siguiente resultado en la terminal
 ```
-
+POX 0.8.0 (halosaur) / Copyright 2011-2022 James McCauley, et al.
+DEBUG:samples.custom_firewall:Firewall launch starting...
+DEBUG:samples.custom_firewall:Firewall position received ---> 2
+DEBUG:samples.custom_firewall:Firewall launch completed
+DEBUG:core:POX 0.8.0 (halosaur) going up...
+DEBUG:core:Running on CPython (3.8.10/Jun 22 2022 20:18:18)
+DEBUG:core:Platform is Linux-5.15.0-53-generic-x86_64-with-glibc2.29
+DEBUG:openflow.of_01:Listening on 0.0.0.0:6633
+INFO:core:POX 0.8.0 (halosaur) is up.
 ```
 
 
@@ -25,23 +36,23 @@ Se espera ver el siguiente resultado en la terminal
 ### 2. Levantar mininet
 En otra terminal, en la carpeta pox/samples ejecutar el comando
 ```
-sudo mn --custom ./custom_topology.py --topo mytopo,XXX,YYY,ZZZ --mac --controller=remote
+sudo mn --custom ./custom_topology.py --topo mytopo,WWW --mac --controller=remote
 ```
-Donde YYY es la cantidad de switches extra a agregar entre el primer switch y el último. Si se envía el valor 0, la topología solamente tendrá los switches 1 (conectado a los hosts 1 y 2) y 2 (conectado a los hosts 3 y 4). Si se envía el valor 5, se tendrán el switch 1 (conectado a los hosts 1 y 2), 2-3-4-5-6, conectados entre sí linealmente, y el switch 7 (conectado a los hosts 3 y 4).
+Donde WWW es la cantidad de switches extra a agregar entre el primer switch y el último. Si se envía el valor 0, la topología solamente tendrá los switches 1 (conectado a los hosts 1 y 2) y 2 (conectado a los hosts 3 y 4). Si se envía el valor 5, se tendrán el switch 1 (conectado a los hosts 1 y 2), 2-3-4-5-6, conectados entre sí linealmente, y el switch 7 (conectado a los hosts 3 y 4).
 
-Se espera ver el siguiente resultado en la terminal
+Se espera ver el siguiente resultado en la terminal si se envía WWW = 5
 ```
-
+BUSCAR
 ```
 
 
 ### 3. Pingall
-En la terminal de mininet, ejecutar el comando `pingall`. Se despera ver el siguiente resultado
+En la terminal de mininet, ejecutar el comando `pingall`. Se espera ver el siguiente resultado
+```
+BUSCAR
 ```
 
-```
-
-indicando que la regla 3 funciona.
+indicando que la regla 3 funciona, si se indicó que los hosts incomunicados debían ser 2 y 3.
 
 
 
