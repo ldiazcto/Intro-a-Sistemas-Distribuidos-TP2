@@ -43,7 +43,6 @@ import pox.forwarding.l2_learning as l2l
 log = core.getLogger()
 
 def _handle_ConnectionUp (event):
-  log.info("-----LAUNCH DE MIXED")
   if event.dpid & 1 == 1:
     log.info("Treating %s as l2_pairs", event.connection)
     event.connection.addListenerByName("PacketIn", l2p._handle_PacketIn)
@@ -52,6 +51,5 @@ def _handle_ConnectionUp (event):
     l2l.LearningSwitch(event.connection, False)
 
 def launch ():
-  log.info("----- ENTREE LAUNCH DE MIXED")
   core.openflow.addListenerByName("ConnectionUp", _handle_ConnectionUp)
   log.info("Mixed switches demo running.")
