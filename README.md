@@ -13,7 +13,7 @@ Parándose en la carpeta pox/samples ejecutar el comando
 python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.custom_firewall --firewallPosition=XXX,YYY,ZZZ
 ```
 Donde 
-- XXX es la posición que se desea del Firewall. Debe ser mayor a 1, sino saltará una excepción y se terminará la ejecución.
+- XXX es la posición que se desea del Firewall. Debe ser mayor a 1, sino saltará una excepción y se terminará la ejecución. Si es mayor a la cantidad de switches especificados en el paso 2, se entenderá que el usuario desea que ningún switch se comporte como firewall.
 - YYY es el host fuente que no puede comunicarse con el host destino (si es el host 1, enviar el número 1)
 - ZZZ es el host desinto que no puede comunicarse con el host fuente
 
@@ -42,36 +42,14 @@ Donde WWW es la cantidad de switches extra a agregar entre el primer switch y el
 
 Se espera ver el siguiente resultado en la terminal si se envía WWW = 5
 ```
-* Creating network
-* Adding controller
-Unable to contact the remote controller at 127.0.0.1:6653
-Connecting to remote controller at 127.0.0.1:6633
-* Adding hosts:
-h1 h2 h3 h4 
-* Adding switches:
-s1 s2 s3 s4 s5 
-* Adding links:
-(s1, h1) (s1, h2) (s1, s2) (s2, s3) (s3, s4) (s4, s5) (s5, h3) (s5, h4) 
-* Configuring hosts
-h1 h2 h3 h4 
-* Starting controller
-c0 
-* Starting 5 switches
-s1 s2 s3 s4 s5 ...
-* Starting CLI:
+BUSCAR
 ```
 
 
 ### 3. Pingall
-En la terminal de mininet, ejecutar el comando `pingall`. Se despera ver el siguiente resultado
+En la terminal de mininet, ejecutar el comando `pingall`. Se espera ver el siguiente resultado
 ```
-mininet> pingall
-* Ping: testing ping reachability
-h1 -> h2 h3 h4 
-h2 -> h1 X h4 
-h3 -> h1 X h4 
-h4 -> h1 h2 h3 
-* Results: 16% dropped (10/12 received)
+BUSCAR
 ```
 
 indicando que la regla 3 funciona, si se indicó que los hosts incomunicados debían ser 2 y 3.
