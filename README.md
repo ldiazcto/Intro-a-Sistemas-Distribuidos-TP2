@@ -2,7 +2,7 @@
 
 Para ejecutar el trabajo, se debe seguir los siguientes pasos:
 
-1. Levantar el firewall
+### 1. Levantar el firewall
 Parándose en la carpeta pox/samples ejecutar el comando
 ```
 python3 pox.py log.level --DEBUG openflow.of_01 forwarding.l2_learning samples.new_firewall --firewallPosition=WWW
@@ -17,7 +17,7 @@ Se espera ver el siguiente resultado en la terminal
 
 
 
-2. Levantar mininet
+### 2. Levantar mininet
 En otra terminal, en la carpeta pox/samples ejecutar el comando
 ```
 sudo mn --custom ./topologia.py --topo mytopo,XXX,YYY,ZZZ --mac --controller=remote
@@ -30,7 +30,7 @@ Se espera ver el siguiente resultado en la terminal
 ```
 
 
-3. Pingall
+### 3. Pingall
 En la terminal de mininet, ejecutar el comando `pingall`. Se despera ver el siguiente resultado
 ```
 
@@ -40,7 +40,7 @@ indicando que la regla 3 funciona.
 
 
 
-4. Xterm H1 y H3 con puerto válido
+### 4. Xterm H1 y H3 con puerto válido
 Antes de probar las reglas 2 y 3, se propone completar este paso para determinar cuál es el comportamiento cuando dos hosts pueden comunicarse correctamente, si uno es un servidor y el otro es un cliente.
 
 Para ello, ejecutar en la terminal de mininet el comando
@@ -73,7 +73,7 @@ Se espera el siguiente resultado por terminal
 
 ```
 
-5. Xterm H1 y H3 con puerto 5001
+### 5. Xterm H1 y H3 con puerto 5001
 Para probar que la regla 2 funciona, en la terminal de mininet ejecutar el comando 
 ```
 xterm h1 h3
@@ -104,7 +104,7 @@ Se espera el siguiente resultado por terminal
 
 De esta manera, se prueba que la segunda regla se aplica correctamente. Ya se pueden cerrar las dos terminales de los hosts.
 
-6. Xterm H2 y H4 con puerto 80
+### 6. Xterm H2 y H4 con puerto 80
 Para probar que la primera regla funciona, se ejecutan comandos similares al punto 5.
 
 En la terminal de mininet ejecutar
