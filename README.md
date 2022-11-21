@@ -138,6 +138,8 @@ reemplazando IP_ADDRESS con la misma dirección que en el comando anterior, para
 De esta manera, se prueba que la primera regla funciona.
 
 
+### 7. Terminar la conexión
+Para terminar la conexión, es suficiente ingresar Ctrl+C en ambas terminales. Se recomeinda ingresar el siguiente comando `sudo mn -c` en la terminal de mininet para eliminar todo proceso o hilo pendiente.
 
 
 
