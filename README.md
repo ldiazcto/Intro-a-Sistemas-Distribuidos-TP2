@@ -1,6 +1,11 @@
 # Intro-a-Sistemas-Distribuidos-TP2
 
-Para ejecutar el trabajo, se debe seguir los siguientes pasos:
+Para ejecutar el trabajo, se debe tener instaladas las siguientes herramientas:
+- mininet
+- xterm (si no fue incluido en la descarga de mininet)
+
+
+y se debe seguir los siguientes pasos:
 
 ### 1. Levantar el firewall
 Parándose en la carpeta pox/samples ejecutar el comando
