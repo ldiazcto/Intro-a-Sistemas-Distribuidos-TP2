@@ -67,7 +67,13 @@ mininet>
 ### 3. Pingall
 En la terminal de mininet, ejecutar el comando `pingall`. Se espera ver el siguiente resultado
 ```
-BUSCAR
+*** Ping: testing ping reachability
+h1 -> h2 h3 h4 
+h2 -> h1 X h4 
+h3 -> h1 X h4 
+h4 -> h1 h2 h3 
+*** Results: 16% dropped (10/12 received)
+
 ```
 
 indicando que la regla 3 funciona, si se indicó que los hosts incomunicados debían ser 2 y 3.
