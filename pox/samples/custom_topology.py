@@ -33,7 +33,7 @@ class MyTopo(Topo):
             self.addLink(previousSwitch, newSwitch)
             previousSwitch = newSwitch
 
-        lastSwitch = self.create_last_switch(switchesAmount+2, previousSwitch)
+        lastSwitch = self.create_last_switch(switchesAmount+1, previousSwitch)
     
     def __init__( self, switchesAmount=0):
         # Initialize topology
