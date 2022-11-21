@@ -25,10 +25,11 @@ DEBUG:samples.custom_firewall:Firewall launch starting...
 DEBUG:samples.custom_firewall:Firewall position received ---> 2
 DEBUG:samples.custom_firewall:Firewall launch completed
 DEBUG:core:POX 0.8.0 (halosaur) going up...
-DEBUG:core:Running on CPython (3.8.10/Jun 22 2022 20:18:18)
-DEBUG:core:Platform is Linux-5.15.0-53-generic-x86_64-with-glibc2.29
+DEBUG:core:Running on CPython (3.10.6/Nov 2 2022 18:53:38)
+DEBUG:core:Platform is Linux-5.15.0-53-generic-x86_64-with-glibc2.35
 DEBUG:openflow.of_01:Listening on 0.0.0.0:6633
 INFO:core:POX 0.8.0 (halosaur) is up.
+
 ```
 
 
@@ -42,7 +43,24 @@ Donde WWW es la cantidad de switches extra a agregar entre el primer switch y el
 
 Se espera ver el siguiente resultado en la terminal si se envía WWW = 5
 ```
-BUSCAR
+*** Creating network
+*** Adding controller
+Unable to contact the remote controller at 127.0.0.1:6653
+Connecting to remote controller at 127.0.0.1:6633
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 s2 s3 s4 s5 s7 
+*** Adding links:
+(s1, h1) (s1, h2) (s1, s2) (s2, s3) (s3, s4) (s4, s5) (s5, s7) (s7, h3) (s7, h4) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+c0 
+*** Starting 6 switches
+s1 s2 s3 s4 s5 s7 ...
+*** Starting CLI:
+mininet> 
 ```
 
 

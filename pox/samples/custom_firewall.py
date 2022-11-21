@@ -75,15 +75,15 @@ def _handle_ConnectionUp (event):
         l2l.LearningSwitch(event.connection, False)
 
 
-def launch (firewallPosition, host_not_src=0, host_not_dst=0):
+def launch (firewallPosition, host_not_src=1, host_not_dst=4):
     log.debug("Firewall launch starting...")
     global_vars.firewallPosition = (int)(firewallPosition)
     
-    if (host_not_src <= 0 or host_not_src > 4) or (host_not_dst <= 0 or host_not_dst >= 5):
+    if ((int)(host_not_src) <= 0 or (int)(host_not_src) > 4) or ((int)(host_not_dst) <= 0 or (int)(host_not_dst) >= 5):
         log.error("Incorrect hosts entered. Both must be 1, 2, 3 or 4")
 
-    global_vars.host_not_src = "00:00:00:00:00:0" + (host_not_src)
-    global_vars.host_not_dst = "00:00:00:00:00:0" + (host_not_dst)
+    global_vars.host_not_src = "00:00:00:00:00:0" + (str)(host_not_src)
+    global_vars.host_not_dst = "00:00:00:00:00:0" + (str)(host_not_dst)
 
     if (global_vars.firewallPosition <= 0):
         log.error("Incorrect Firewall Postion, must be > 0")

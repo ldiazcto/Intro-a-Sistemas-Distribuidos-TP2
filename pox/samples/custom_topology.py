@@ -24,20 +24,20 @@ class MyTopo(Topo):
 
         return switch_outter_right
 
-    def configure_structure(self, switchesAmount):
+    def configure_structure(self, switchesAmount ):
         firstSwtich = self.create_first_switch()
         
         previousSwitch = firstSwtich
-        for i in range(2, switchesAmount): 
-            newSwitch = self.addSwitch("s" + (str)(i))  
+        for i in range(1, switchesAmount): 
+            newSwitch = self.addSwitch("s" + (str)(i+1))  
             self.addLink(previousSwitch, newSwitch)
             previousSwitch = newSwitch
 
-        lastSwitch = self.create_last_switch(switchesAmount, previousSwitch)
+        lastSwitch = self.create_last_switch(switchesAmount+2, previousSwitch)
     
     def __init__( self, switchesAmount=0):
         # Initialize topology
         Topo.__init__( self )
-        self.configure_structure( (int) (switchesAmount)+2)
+        self.configure_structure( (int) (switchesAmount))
 
 topos = {'mytopo': MyTopo}
