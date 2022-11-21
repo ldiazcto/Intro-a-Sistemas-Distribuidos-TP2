@@ -98,10 +98,6 @@ sudo iperf -s -B IP_ADDRESS -u -p VALID_PORT
 ```
 Donde IP_ADDRESS debe ser la dirección IP de ese nodo. En el caso del nodo 3, será 10.0.0.3, y VALID_PORT debe ser un puerto no prohibido por enunciado, como por ejemplo el 8000.
 
-Se espera el siguiente resultado
-```
-
-```
 
 
 Para levantar el cliente en el host 1, en la respectiva terminal ejecutar el comando
@@ -110,10 +106,13 @@ sudo iperf -c IP_ADDRESS -u -p VALID_PORT -t 5
 ```
 Donde IP_ADDRESS y VALID_PORT deben ser los mismos valores que se ingresaron en el comando anterior.
 
-Se espera el siguiente resultado por terminal
-``` 
 
-```
+
+Se espera el siguiente resultado
+
+[H1 y H3 por UDP puerto 8000](https://imgur.com/PjkRMCF )
+
+
 
 ### 5. Xterm H1 y H3 con puerto 5001
 Para probar que la regla 2 funciona, en la terminal de mininet ejecutar el comando 
@@ -127,10 +126,6 @@ sudo iperf -s -B IP_ADDRESS -u -p 5001
 ```
 Donde IP_ADDRESS debe ser 10.0.0.3, debido a que se trata del host 3.
 
-Se espera el siguiente resultado
-```
-
-```
 
 
 Para levantar el cliente en el host 1, en la respectiva terminal ejecutar el comando
@@ -139,10 +134,9 @@ sudo iperf -c IP_ADDRESS -u -p 5001 -t 5
 ```
 Donde IP_ADDRESS debe ser la misma dirección que se ingresó en el comando anterior.
 
-Se espera el siguiente resultado por terminal
-``` 
+Se espera el siguiente resultado
 
-```
+[H1 y H3 por UDP puerto 5001](https://imgur.com/6PNTilB )
 
 De esta manera, se prueba que la segunda regla se aplica correctamente. Ya se pueden cerrar las dos terminales de los hosts.
 
@@ -158,19 +152,18 @@ En la terminal de h2, ejecutar el comando
 ```
 sudo iperf -s -B IP_ADDRESS -p 80
 ```
-reemplazando IP_ADDRESS con la dirección IP válida del host, 10.0.0.2 en este caso, para que este host sea el servidor. Se espera la siguiente respuesta
-```
-sudo iperf -c IP_ADDRESS -p 80 -t 5
-```
+reemplazando IP_ADDRESS con la dirección IP válida del host, 10.0.0.2 en este caso, para que este host sea el servidor.
+
 
 En la terminal de h4, ejecutar el comando
 ```
+sudo iperf -c IP_ADDRESS -p 80 -t 5
+```
+reemplazando IP_ADDRESS con la misma dirección que en el comando anterior, para que este host sea el cliente.
 
-```
-reemplazando IP_ADDRESS con la misma dirección que en el comando anterior, para que este host sea el cliente. Se espera el siguiente resultado
-```
 
-```
+Se espera el siguiente resultado
+[H2 y H4 por TCP puerto 80](https://imgur.com/W0wCIsq )
 
 De esta manera, se prueba que la primera regla funciona.
 
