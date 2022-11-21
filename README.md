@@ -18,9 +18,17 @@ Donde
 - ZZZ es el host desinto que no puede comunicarse con el host fuente
 
 
-Se espera ver el siguiente resultado en la terminal
+Si se envía el firewall position 2, y los hosts incomunicados siendo 2 y 3, se espera ver el siguiente resultado en la terminal
 ```
-
+POX 0.8.0 (halosaur) / Copyright 2011-2022 James McCauley, et al.
+DEBUG:samples.custom_firewall:Firewall launch starting...
+DEBUG:samples.custom_firewall:Firewall position received ---> 2
+DEBUG:samples.custom_firewall:Firewall launch completed
+DEBUG:core:POX 0.8.0 (halosaur) going up...
+DEBUG:core:Running on CPython (3.8.10/Jun 22 2022 20:18:18)
+DEBUG:core:Platform is Linux-5.15.0-53-generic-x86_64-with-glibc2.29
+DEBUG:openflow.of_01:Listening on 0.0.0.0:6633
+INFO:core:POX 0.8.0 (halosaur) is up.
 ```
 
 
@@ -32,19 +40,41 @@ sudo mn --custom ./custom_topology.py --topo mytopo,WWW --mac --controller=remot
 ```
 Donde WWW es la cantidad de switches extra a agregar entre el primer switch y el último. Si se envía el valor 0, la topología solamente tendrá los switches 1 (conectado a los hosts 1 y 2) y 2 (conectado a los hosts 3 y 4). Si se envía el valor 5, se tendrán el switch 1 (conectado a los hosts 1 y 2), 2-3-4-5-6, conectados entre sí linealmente, y el switch 7 (conectado a los hosts 3 y 4).
 
-Se espera ver el siguiente resultado en la terminal
+Se espera ver el siguiente resultado en la terminal si se envía WWW = 5
 ```
-
+* Creating network
+* Adding controller
+Unable to contact the remote controller at 127.0.0.1:6653
+Connecting to remote controller at 127.0.0.1:6633
+* Adding hosts:
+h1 h2 h3 h4 
+* Adding switches:
+s1 s2 s3 s4 s5 
+* Adding links:
+(s1, h1) (s1, h2) (s1, s2) (s2, s3) (s3, s4) (s4, s5) (s5, h3) (s5, h4) 
+* Configuring hosts
+h1 h2 h3 h4 
+* Starting controller
+c0 
+* Starting 5 switches
+s1 s2 s3 s4 s5 ...
+* Starting CLI:
 ```
 
 
 ### 3. Pingall
 En la terminal de mininet, ejecutar el comando `pingall`. Se despera ver el siguiente resultado
 ```
-
+mininet> pingall
+* Ping: testing ping reachability
+h1 -> h2 h3 h4 
+h2 -> h1 X h4 
+h3 -> h1 X h4 
+h4 -> h1 h2 h3 
+* Results: 16% dropped (10/12 received)
 ```
 
-indicando que la regla 3 funciona.
+indicando que la regla 3 funciona, si se indicó que los hosts incomunicados debían ser 2 y 3.
 
 
 
