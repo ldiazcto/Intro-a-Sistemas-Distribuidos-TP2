@@ -104,7 +104,7 @@ Donde IP_ADDRESS y VALID_PORT deben ser los mismos valores que se ingresaron en 
 
 Se espera el siguiente resultado
 
-![Screenshot](H1 Y H4 UDP PUERTO 8000.jpeg)
+![H1 y H3 por UDP puerto 8000](https://user-images.githubusercontent.com/71948512/203405796-7832692c-36cd-4ca1-b6f8-bd0bf55e659b.jpeg)
 
 
 ### 5. Xterm H1 y H3 con puerto 5001
