@@ -156,7 +156,10 @@ reemplazando IP_ADDRESS con la misma dirección que en el comando anterior, para
 
 
 Se espera el siguiente resultado
+
+
 ![H2 y H4 por TCP puerto 80](https://user-images.githubusercontent.com/71948512/203406031-7fffcaca-e0e0-4b57-bd41-dd263662aee3.jpeg)
+
 
 
 De esta manera, se prueba que la primera regla funciona.
