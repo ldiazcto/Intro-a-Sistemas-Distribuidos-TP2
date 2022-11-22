@@ -104,7 +104,7 @@ Donde IP_ADDRESS y VALID_PORT deben ser los mismos valores que se ingresaron en 
 
 Se espera el siguiente resultado
 
-![Alt text](H1 Y H4 UDP PUERTO 8000.jpeg?raw=true "H1 y H4 por UDP puerto 8000")
+![Screenshot](H1 Y H4 UDP PUERTO 8000.jpeg)
 
 
 ### 5. Xterm H1 y H3 con puerto 5001
