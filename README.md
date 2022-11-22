@@ -34,14 +34,12 @@ INFO:core:POX 0.8.0 (halosaur) is up.
 
 ```
 
-
-
 ### 2. Levantar mininet
 En otra terminal, en la carpeta pox/samples ejecutar el comando
 ```
 sudo mn --custom ./custom_topology.py --topo mytopo,WWW --mac --controller=remote
 ```
-Donde WWW es la cantidad de switches extra a agregar entre el primer switch y el último. Si se envía el valor 0, la topología solamente tendrá los switches 1 (conectado a los hosts 1 y 2) y 2 (conectado a los hosts 3 y 4). Si se envía el valor 5, se tendrán el switch 1 (conectado a los hosts 1 y 2), 2-3-4-5-6, conectados entre sí linealmente, y el switch 7 (conectado a los hosts 3 y 4).
+Donde WWW+1 es la cantidad de switches extra a agregar entre el primer switch y el último. Si se envía el valor 0, la topología solamente tendrá los switches 1 (conectado a los hosts 1 y 2) y 2 (conectado a los hosts 3 y 4). Si se envía el valor 5, se tendrán el switch 1 (conectado a los hosts 1 y 2), 2-3-4-5, conectados entre sí linealmente, y el switch 6 (conectado a los hosts 3 y 4).
 
 Se espera ver el siguiente resultado en la terminal si se envía WWW = 5
 ```
@@ -77,9 +75,7 @@ h4 -> h1 h2 h3
 *** Results: 16% dropped (10/12 received)
 
 ```
-
 indicando que la regla 3 funciona, si se indicó que los hosts incomunicados debían ser 2 y 3.
-
 
 
 ### 4. Xterm H1 y H3 con puerto válido
@@ -97,8 +93,6 @@ Para levantar el servidor en el host 3, ejecutar en la respectiva terminal el co
 sudo iperf -s -B IP_ADDRESS -u -p VALID_PORT
 ```
 Donde IP_ADDRESS debe ser la dirección IP de ese nodo. En el caso del nodo 3, será 10.0.0.3, y VALID_PORT debe ser un puerto no prohibido por enunciado, como por ejemplo el 8000.
-
-
 
 Para levantar el cliente en el host 1, en la respectiva terminal ejecutar el comando
 ```
