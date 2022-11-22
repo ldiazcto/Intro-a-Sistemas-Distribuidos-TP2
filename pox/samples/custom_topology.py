@@ -35,9 +35,11 @@ class MyTopo(Topo):
 
         lastSwitch = self.create_last_switch(switchesAmount+1, previousSwitch)
     
-    def __init__( self, switchesAmount=0):
+    def __init__( self, switchesAmount=1):
         # Initialize topology
         Topo.__init__( self )
+        if(switchesAmount == 0):
+            raise ValueError("Error Switches Amount must be > 0 ")
         self.configure_structure( (int) (switchesAmount))
 
 topos = {'mytopo': MyTopo}
